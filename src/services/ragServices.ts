@@ -1,5 +1,5 @@
-import { embedText, cosineSimilarity } from '../utils/embedding';
-import docs from '../data/docs/data.json';
+import { embedText, cosineSimilarity } from '../utils/embedding.ts';
+import docs from '../data/docs/data.json' assert { type: 'json' };;
 
 export async function getRelevantChunks(query: string) {
   const queryVec = await embedText(query);

@@ -1,11 +1,12 @@
-import { config, OpenAIApi } from 'openai';
-import { getMemoryForSession, saveToMemory } from './memoryService';
-import { getRelevantChunks } from './ragServices';
-import { parseAndExecutePlugins } from './pluginService';
-import { buildPrompt } from '../utils/promptBuilder';
+import OpenAI from 'openai';
+import { getMemoryForSession, saveToMemory } from './memoryService.ts';
+import { getRelevantChunks } from './ragServices.ts';
+import { parseAndExecutePlugins } from './pluginService.ts';
+import { buildPrompt } from '../utils/promptBuilder.ts';
 
-config.apiKey = process.env.OPENAI_API_KEY!;
-const openai = new OpenAIApi();
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
+});
 
 export async function handleMessage(message: string, sessionId: string) {
   const memory = getMemoryForSession(sessionId);
@@ -25,7 +26,7 @@ export async function handleMessage(message: string, sessionId: string) {
   });
 
   saveToMemory(sessionId, { role: 'user', content: message });
-  saveToMemory(sessionId, { role: 'assistant', content: response.choices[0].message.content });
+  saveToMemory(sessionId, { role: 'assistant', content: response.choices[0].message.content ?? '' });
 
   return response.choices[0].message.content;
 }
