@@ -1,16 +1,32 @@
-export function buildPrompt({ memory, message, context, plugins }: any) {
+interface PromptInput {
+  memory: { role: string; content: string }[];
+  message: string;
+  context: string[];
+  plugins: string;
+}
+
+export function buildPrompt({
+  memory,
+  message,
+  context,
+  plugins,
+}: PromptInput): string {
+  const contextStr = context.join("\n---\n");
+  const memoryStr = memory.map((m) => `${m.role}: ${m.content}`).join("\n");
+
   return `
-You are a helpful assistant.
+You are an intelligent AI assistant.
+
+Context:
+${contextStr}
 
 Memory:
-${memory.map((m: any) => `${m.role}: ${m.content}`).join('\n')}
+${memoryStr}
 
-Relevant Context:
-${context.join('\n')}
+Plugin Output:
+${plugins}
 
-Plugin Outputs:
-${plugins.join('\n')}
-
-User: ${message}
+User:
+${message}
 `;
 }

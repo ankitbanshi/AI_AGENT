@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function parseAndExecutePlugins(message: string) {
   const output: string[] = [];
 
-  if (message.toLowerCase().includes('weather')) {
+  if (message.toLowerCase().includes("weather")) {
     // Fake or real weather
-    const city = message.split('in ')[1] || 'Bangalore';
+    const city = message.split("in ")[1] || "Bangalore";
     const weather = await axios.get(`https://wttr.in/${city}?format=3`);
     output.push(`Weather in ${city}: ${weather.data}`);
   }

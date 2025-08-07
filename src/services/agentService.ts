@@ -1,32 +1,27 @@
-import OpenAI from 'openai';
+// src/services/agentService.ts
 import { getMemoryForSession, saveToMemory } from './memoryService.ts';
 import { getRelevantChunks } from './ragServices.ts';
 import { parseAndExecutePlugins } from './pluginService.ts';
 import { buildPrompt } from '../utils/promptBuilder.ts';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
+import { generateGeminiResponse } from './geminiServices.ts';
 
 export async function handleMessage(message: string, sessionId: string) {
   const memory = getMemoryForSession(sessionId);
-  const relevantChunks = await getRelevantChunks(message);
+  const contextChunks = await getRelevantChunks(message);
   const pluginOutput = await parseAndExecutePlugins(message);
+const relevantChunks = await getRelevantChunks(message); // ✅ Correct declaration
 
-  const prompt = buildPrompt({
-    memory,
-    message,
-    context: relevantChunks,
-    plugins: pluginOutput,
-  });
+const prompt = buildPrompt({
+  memory,
+  message,
+  context: relevantChunks,
+  plugins: pluginOutput.join('\n'), // <-- Convert string[] to string
+});
 
-  const response = await openai.chat.completions.create({
-    messages: [{ role: 'system', content: prompt }],
-    model: 'gpt-3.5-turbo',
-  });
+  const response = await generateGeminiResponse(prompt);
 
   saveToMemory(sessionId, { role: 'user', content: message });
-  saveToMemory(sessionId, { role: 'assistant', content: response.choices[0].message.content ?? '' });
+  saveToMemory(sessionId, { role: 'assistant', content: response });
 
-  return response.choices[0].message.content;
+  return response;
 }
