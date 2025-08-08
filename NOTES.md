@@ -38,7 +38,7 @@ Argument of type '{ content: string; }' is not assignable...
 
 ### 4. Postman endpoint testing issue
 - **Cause**: Wrong local URL or route path
-- **Solution**: Confirmed API is running at `http://localhost:3000/agent/message` and selected POST method with correct JSON body.
+- **Solution**: Confirmed API is running at `http://localhost:5000/agent/message` and selected POST method with correct JSON body.
 
 ---
 
