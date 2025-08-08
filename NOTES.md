@@ -6,7 +6,7 @@
 ### AI-Generated:
 - Initial README template and sections
 - Basic route structure for Express server (`/agent/message`)
-- Prompts and Readme.md and Notes.md file
+- Prompts and Notes.md file
 - Suggestions on rate-limit handling and error structure
 
 
@@ -38,7 +38,7 @@ Argument of type '{ content: string; }' is not assignable...
 
 ### 4. Postman endpoint testing issue
 - **Cause**: Wrong local URL or route path
-- **Solution**: Confirmed API is running at `http://localhost:3000/agent/message` and selected POST method with correct JSON body.
+- **Solution**: Confirmed API is running at `http://localhost:5000/agent/message` and selected POST method with correct JSON body.
 
 ---
 
@@ -66,15 +66,7 @@ const finalPrompt = relevantChunks.join("
 User: " + userMessage;
 ```
 
-- This final prompt is passed to the Gemini model to generate a context-aware response.
-
----
-
-## 📌 TODOs / Enhancements
-- Add persistent vector DB support (e.g., Pinecone, Weaviate)
-- Improve plugin parsing using regex or DSL
-- Add role-based system for memory (system vs user)
-- Integrate with frontend dashboard
+- This final prompt is passed to the Gemini model to generate a context-aware response
 
 ---
 
