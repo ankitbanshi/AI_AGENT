@@ -1,6 +1,6 @@
 # 🤖 AI Agent Server – Gemini API Integration with RAG (TypeScript + Node.js)
 
-A simple and powerful AI Agent Server built using **Node.js**, **TypeScript**, **Express.js**, and **Google's Gemini API**. It provides an endpoint to send prompts and get AI-generated responses via Gemini 1.5 models, with optional **RAG (Retrieval-Augmented Generation)** and **embeddings** support.
+A simple and powerful AI Agent Server built using **Node.js**, **TypeScript**, **Express.js**, and **Google's Gemini API**. It provides an endpoint to send prompts and get AI-generated responses via Gemini 1.5 models, with **RAG (Retrieval-Augmented Generation)** and **embeddings** support.
 
 ---
 
