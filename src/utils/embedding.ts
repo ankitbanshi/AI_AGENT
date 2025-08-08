@@ -1,4 +1,4 @@
-import { genAI } from "./gemini.ts";
+import { genAI } from "./gemini.js";
 
 export async function embedText(text: string): Promise<number[]> {
   const embeddingModel = genAI.getGenerativeModel({ model: "embedding-001" });

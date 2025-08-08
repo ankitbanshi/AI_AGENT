@@ -1,4 +1,4 @@
-import { embedText, cosineSimilarity } from "../utils/embedding.ts";
+import { embedText, cosineSimilarity } from "../utils/embedding.js";
 import docs from "../data/docs/data.json" assert { type: "json" };
 
 export async function getRelevantChunks(query: string) {

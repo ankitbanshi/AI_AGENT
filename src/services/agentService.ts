@@ -1,15 +1,15 @@
 // src/services/agentService.ts
-import { getMemoryForSession, saveToMemory } from './memoryService.ts';
-import { getRelevantChunks } from './ragServices.ts';
-import { parseAndExecutePlugins } from './pluginService.ts';
-import { buildPrompt } from '../utils/promptBuilder.ts';
-import { generateGeminiResponse } from './geminiServices.ts';
+import { getMemoryForSession, saveToMemory } from './memoryService.js';
+import { getRelevantChunks } from './ragServices.js';
+import { parseAndExecutePlugins } from './pluginService.js';
+import { buildPrompt } from '../utils/promptBuilder.js';
+import { generateGeminiResponse } from './geminiServices.js';
 
 export async function handleMessage(message: string, sessionId: string) {
   const memory = getMemoryForSession(sessionId);
   const contextChunks = await getRelevantChunks(message);
   const pluginOutput = await parseAndExecutePlugins(message);
-const relevantChunks = await getRelevantChunks(message); // ✅ Correct declaration
+const relevantChunks = await getRelevantChunks(message); 
 
 const prompt = buildPrompt({
   memory,

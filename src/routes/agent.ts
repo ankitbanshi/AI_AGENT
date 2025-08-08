@@ -1,5 +1,5 @@
 import express from "express";
-import { handleMessage } from "../services/agentService.ts";
+import { handleMessage } from "../services/agentService.js";
 
 const router = express.Router();
 
